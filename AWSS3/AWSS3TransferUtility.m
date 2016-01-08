@@ -32,6 +32,7 @@ NSString *const AWSS3TransferUtilityUserAgent = @"transfer-utility";
 @property (strong, nonatomic) NSString *temporaryDirectoryPath;
 @property (strong, nonatomic) AWSSynchronizedMutableDictionary *taskDictionary;
 @property (copy, nonatomic) void (^backgroundURLSessionCompletionHandler)();
+@property (strong, nonatomic) NSOperationQueue *operationQueue;
 
 @end
 
@@ -161,11 +162,13 @@ static AWSS3TransferUtility *_defaultS3TransferUtility = nil;
 #pragma clang diagnostic pop
         }
 
+        _operationQueue = [[NSOperationQueue alloc] init];
+        _operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
         configuration.timeoutIntervalForResource = AWSS3TransferUtilityTimeoutIntervalForResource;
         _session = [NSURLSession sessionWithConfiguration:configuration
                                                  delegate:self
-                                            delegateQueue:nil];
-
+                                            delegateQueue:_operationQueue];
+        
         _taskDictionary = [AWSSynchronizedMutableDictionary new];
 
         // Creates a temporary directory for data uploads
