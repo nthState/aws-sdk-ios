@@ -673,7 +673,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         {
             AWSS3TransferManagerUploadRequest *obj = (AWSS3TransferManagerUploadRequest*)cachedObject;
             if (block) {
-                BOOL shouldCancel = block(cachedObject);
+                BOOL shouldCancel = block(obj);
                 if (shouldCancel)
                 {
                     [tasks addObject:[obj cancel]];
