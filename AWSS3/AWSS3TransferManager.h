@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, AWSS3TransferManagerRequestState) {
 };
 
 typedef void (^AWSS3TransferManagerResumeAllBlock) (AWSRequest *request);
+typedef BOOL (^AWSS3TransferManagerCancelUploadBlock) (AWSRequest *request);
 
 @class AWSS3;
 @class AWSTask;
@@ -205,6 +206,17 @@ typedef void (^AWSS3TransferManagerResumeAllBlock) (AWSRequest *request);
  @return AWSTask.
  */
 - (AWSTask *)cancelAll;
+
+/**
+ Cancel an upload request that matches a BOOL in the block.
+ 
+ Return true per item in the block to cancel.
+ 
+ Useful when you don't have a reference to the original request
+ 
+ @return AWSTask.
+ */
+- (AWSTask *)cancelUploadMatching:(AWSS3TransferManagerCancelUploadBlock)block;
 
 /**
  Pauses all of the upload and download requests.
