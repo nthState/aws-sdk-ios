@@ -19,6 +19,7 @@
 @interface AWSURLSessionManager : NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>
 
 @property (nonatomic, strong) AWSNetworkingConfiguration *configuration;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 - (instancetype)initWithConfiguration:(AWSNetworkingConfiguration *)configuration;
 

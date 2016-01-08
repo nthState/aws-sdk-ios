@@ -108,9 +108,12 @@ typedef NS_ENUM(NSInteger, AWSURLSessionTaskType) {
             sessionConfiguration.timeoutIntervalForResource = configuration.timeoutIntervalForResource;
         }
 
+        _operationQueue = [[NSOperationQueue alloc] init];
+        _operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
         _session = [NSURLSession sessionWithConfiguration:sessionConfiguration
                                                  delegate:self
-                                            delegateQueue:nil];
+                                            delegateQueue:_operationQueue];
+        
         _sessionManagerDelegates = [AWSSynchronizedMutableDictionary new];
     }
 
