@@ -36,7 +36,6 @@ typedef NS_ENUM(NSInteger, AWSS3TransferManagerRequestState) {
 };
 
 typedef void (^AWSS3TransferManagerResumeAllBlock) (AWSRequest *request);
-typedef BOOL (^AWSS3TransferManagerCancelUploadBlock) (AWSRequest *request);
 
 @class AWSS3;
 @class AWSTask;
@@ -44,6 +43,8 @@ typedef BOOL (^AWSS3TransferManagerCancelUploadBlock) (AWSRequest *request);
 @class AWSS3TransferManagerUploadOutput;
 @class AWSS3TransferManagerDownloadRequest;
 @class AWSS3TransferManagerDownloadOutput;
+
+typedef BOOL (^AWSS3TransferManagerCancelUploadBlock) (AWSS3TransferManagerUploadRequest *request);
 
 /**
  High level utility for managing transfers to Amazon S3. S3TransferManager provides a simple API for uploading and downloading content to Amazon S3, and makes extensive use of Amazon S3 multipart uploads to achieve enhanced throughput, performance and reliability.
