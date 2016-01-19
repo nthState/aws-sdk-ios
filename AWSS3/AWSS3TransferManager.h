@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, AWSS3TransferManagerRequestState) {
 
 typedef void (^AWSS3TransferManagerResumeAllBlock) (AWSRequest *request);
 typedef BOOL (^AWSS3TransferManagerCancelBlock) (AWSRequest *request);
+typedef void (^AWSS3TransferManagerEnumerateBlock) (AWSRequest *request);
 
 @class AWSS3;
 @class AWSTask;
@@ -217,6 +218,15 @@ typedef BOOL (^AWSS3TransferManagerCancelBlock) (AWSRequest *request);
  @return AWSTask.
  */
 - (AWSTask *)cancelMatching:(AWSS3TransferManagerCancelBlock)block;
+
+/**
+ Loop over all requests
+ 
+ Useful when you don't have a reference to the original request
+ 
+ @return AWSTask.
+ */
+- (void)enumerateRequests:(AWSS3TransferManagerEnumerateBlock)block;
 
 /**
  Pauses all of the upload and download requests.

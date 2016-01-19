@@ -683,6 +683,22 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     return [AWSTask taskForCompletionOfAllTasks:tasks];
 }
 
+- (void)enumerateRequests:(AWSS3TransferManagerEnumerateBlock)block {
+    NSMutableArray *keys = [NSMutableArray new];
+    [self.cache.diskCache enumerateObjectsWithBlock:^(AWSTMDiskCache *cache, NSString *key, id<NSCoding> object, NSURL *fileURL) {
+        [keys addObject:key];
+    }];
+    
+    NSMutableArray *tasks = [NSMutableArray new];
+    for (NSString *key in keys) {
+        AWSRequest *cachedObject = [self.cache objectForKey:key];
+        if ([cachedObject isKindOfClass:[AWSS3TransferManagerUploadRequest class]]
+            || [cachedObject isKindOfClass:[AWSS3TransferManagerDownloadRequest class]]) {
+            block(cachedObject);
+        }
+    }
+}
+
 - (AWSTask *)pauseAll {
     NSMutableArray *keys = [NSMutableArray new];
     [self.cache.diskCache enumerateObjectsWithBlock:^(AWSTMDiskCache *cache, NSString *key, id<NSCoding> object, NSURL *fileURL) {
