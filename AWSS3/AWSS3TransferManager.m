@@ -750,7 +750,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         }
 
         //remove Resumed Object
-        [weakSelf.cache removeObjectForKey:key];
+        //[weakSelf.cache removeObjectForKey:key];
     }
 
     return [[AWSTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(AWSTask *task) {
