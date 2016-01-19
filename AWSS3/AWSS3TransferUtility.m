@@ -167,7 +167,7 @@ static AWSS3TransferUtility *_defaultS3TransferUtility = nil;
         configuration.timeoutIntervalForResource = AWSS3TransferUtilityTimeoutIntervalForResource;
         _session = [NSURLSession sessionWithConfiguration:configuration
                                                  delegate:self
-                                            delegateQueue:_operationQueue];
+                                            delegateQueue:nil];
         
         _taskDictionary = [AWSSynchronizedMutableDictionary new];
 

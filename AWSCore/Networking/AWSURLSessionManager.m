@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, AWSURLSessionTaskType) {
         _operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
         _session = [NSURLSession sessionWithConfiguration:sessionConfiguration
                                                  delegate:self
-                                            delegateQueue:_operationQueue];
+                                            delegateQueue:nil];
         
         _sessionManagerDelegates = [AWSSynchronizedMutableDictionary new];
     }
