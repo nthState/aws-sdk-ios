@@ -689,7 +689,6 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         [keys addObject:key];
     }];
     
-    NSMutableArray *tasks = [NSMutableArray new];
     for (NSString *key in keys) {
         AWSRequest *cachedObject = [self.cache objectForKey:key];
         if ([cachedObject isKindOfClass:[AWSS3TransferManagerUploadRequest class]]
